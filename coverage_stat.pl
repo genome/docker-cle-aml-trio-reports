@@ -5,7 +5,20 @@ use warnings;
 
 use feature qw(say);
 
+die("Wrong number of arguments. Provide normal IDT, normal RMG, normal CMR, tumor IDT, tumor RMG, tumor CMR, followup IDT, followup RMG, followup CMR, output file") unless @ARGV == 10;
 my ($normal_IDT_stat, $normal_RMG_stat, $normal_CMR_stat, $tumor_IDT_stat, $tumor_RMG_stat, $tumor_CMR_stat, $followup_IDT_stat, $followup_RMG_stat, $followup_CMR_stat, $out_file) = @ARGV;
+
+if ($normal_RMG_stat =~ /AML_CMR/ and $normal_CMR_stat =~ /AML_RMG/) {
+    ($normal_RMG_stat, $normal_CMR_stat) = ($normal_CMR_stat, $normal_RMG_stat);
+}
+
+if ($tumor_RMG_stat =~ /AML_CMR/ and $tumor_CMR_stat =~ /AML_RMG/) {
+    ($tumor_RMG_stat, $tumor_CMR_stat) = ($tumor_CMR_stat, $tumor_RMG_stat);
+}
+
+if ($followup_RMG_stat =~ /AML_CMR/ and $followup_CMR_stat =~ /AML_RMG/) {
+    ($followup_RMG_stat, $followup_CMR_stat) = ($followup_CMR_stat, $followup_RMG_stat);
+}
 
 my @metrics_names = qw(
     MEAN_TARGET_COVERAGE     
