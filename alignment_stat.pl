@@ -5,6 +5,7 @@ use warnings;
 
 use feature qw(say);
 
+die("Wrong number of arguments. Provide normal alignment metrics, tumor alignment metrics, followup alignment metrics and output file") unless @ARGV == 4;
 my ($normal_stat, $tumor_stat, $followup_stat, $out_file) = @ARGV;
 
 my @metrics_names = qw(
