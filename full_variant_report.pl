@@ -5,6 +5,7 @@ use warnings;
 
 use feature qw(say);
 
+die("Wrong number of arguments. Provide variant tsv, followup snv bam_readcount, followup indel bam_readcount, pindel region vcf, output tsv") unless @ARGV == 5;
 my ($tsv, $followup_snv_bamrc, $followup_indel_bamrc, $pindel_region_vcf, $output_tsv) = @ARGV;
 
 my $snv_bamrc_info   = get_bamrc_info($followup_snv_bamrc);
