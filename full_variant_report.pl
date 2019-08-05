@@ -47,7 +47,11 @@ while (<$tsv_fh>) {
         }
         my $id = $info{CHROM}.'__'.$pos;
         my $followup_bamrc_info = $indel_bamrc_info->{$id};
-        
+        unless ($followup_bamrc_info) {
+            warn "$id does not have indel bam_readcount info available";
+            say $out_fh $_."\tNA\tNA\tNA";
+            next;
+        }
         my $alt_ct = exists $followup_bamrc_info->{allele_ct}->{$bamrc_str} ? $followup_bamrc_info->{allele_ct}->{$bamrc_str} : 0;
         my $followup_AD = $followup_bamrc_info->{allele_ct}->{$followup_bamrc_info->{ref}}.','.$alt_ct;
         my $followup_DP = $followup_bamrc_info->{depth};
